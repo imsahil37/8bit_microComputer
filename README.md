@@ -1,7 +1,5 @@
 # VeriCore-8: An 8-bit Microcomputer in Verilog 💻
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 Welcome to **VeriCore-8**! 🚀 This is a complete 8-bit microcomputer designed and simulated entirely from the ground up in Verilog. This project brings classic computer architecture to life, featuring a custom-built CPU, a unique assembly language, and a full toolchain for simulation and verification.
 
 This isn't just a CPU; it's a complete, functional computer system built on the Von Neumann architecture, where both instructions and data share the same memory space.
