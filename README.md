@@ -1,4 +1,4 @@
-# VeriCore-8: An 8-bit Microcomputer in Verilog 💻
+# 8-bit Microcomputer 💻
 
 Welcome to **VeriCore-8**! 🚀 This is a complete 8-bit microcomputer designed and simulated entirely from the ground up in Verilog. This project brings classic computer architecture to life, featuring a custom-built CPU, a unique assembly language, and a full toolchain for simulation and verification.
 
