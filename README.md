@@ -1,85 +1,92 @@
 # 8-bit Microcomputer 💻
 
-**An 8-bit Von-Neumann MicroComputer in Verilog HDL**
+Welcome to the **8-bit Microcomputer** project! 🚀 This is a complete 8-bit computer designed and simulated entirely from the ground up in Verilog. This project brings classic computer architecture to life, featuring a custom-built CPU, a unique assembly language, and a full toolchain for simulation and verification.
 
-This computer is based on the Von Neumann architecture (same memory shared between program and data). The VerilogModules folder contains all the Verilog source codes to simulate the 8-bit computer and also the testbench file. The modules required for the computer are defined separately and then combined and interfaced in a common module named `CPU.v`. It also contains a testbench file named `CPU_tb.v` which is used to simulate the behaviour of the computer.
+This isn't just a CPU; it's a complete, functional computer system built on the Von Neumann architecture, where both instructions and data share the same memory space.
 
-The parent folder contains the Assembly language compiler in the form of a python script as well as a `DemoProgram.asm` file which is essentially a 16 byte executable assembly code. The compiler accepts the compilable text file as an argument in the compilation line and automatically updates the `RAM.v` module with the binary instructions.
+## ✨ Core Features
 
-The outputFiles folder contains the output obtained from the testing of the modules.
+- 🧠 **Custom 8-bit CPU:** A modular CPU design with an Arithmetic Logic Unit (ALU), program counter, instruction controller, and registers, all written in Verilog.
+- 🐍 **Full Toolchain:** Includes a custom assembler (`Assembler_v2.py`) built in Python that automatically translates assembly code into a ready-to-use Verilog RAM module.
+- 🏛️ **Von Neumann Architecture:** A classic design where 16 bytes of RAM are shared for both program instructions and data.
+- 📈 **Simulation & Verification:** Comes with a Verilog testbench and a `Makefile` for easy, one-command simulation using Icarus Verilog and waveform analysis with GTKWave.
 
 ## 📊 Simulation Waveform
+
+The waveform below shows the successful execution of the demo assembly program, visualizing the activity on the bus and the changing values in the registers over time.
 
 <div>
 <img src="./outputFiles/output.png" style="width:100%; height:auto;"></img>
 </div>
 
-## Using The Assembler
+## 🛠️ Getting Started
 
-In order to use the assembler, please use below mentioned syntax:
+There are two main ways to simulate this project: using the automated `make` command (the quickest method) or by running the commands manually.
 
-```bash
-python Assembler_v2.py <input_filename_with_extension>
+### Prerequisites
+
+- **Verilog Simulator:** **Icarus Verilog** (`iverilog`) is required.
+- **Waveform Viewer:** **GTKWave** is needed to view the simulation output.
+- **Python 3:** Required to run the assembler.
+- **Make:** (Optional) Required if you want to use the automated `make` command.
+
+### 1. Assemble the Program
+
+This is the only required first step. This command converts your assembly code (`DemoProgram.asm`) into a ready-to-use Verilog RAM module.
+
+To use the assembler, run one of the following commands:
+```shell
+python3 Assembler_v2.py <your_assembly_file.asm>
 ```
 
-Or,
+or
 
-```bash
-python3 Assembler_v2.py <input_filename_with_extension>
+```shell
+python Assembler_v2.py <your_assembly_file.asm>
 ```
 
-And press Enter.
+This script will automatically update the `RAM.v` module in the `VerilogModules` folder with the new set of instructions. There's no need to copy and paste anything manually!
 
-Now the `RAM.v` module in the VerilogModules folder will be updated with the new set of instructions. No need to copy paste anything into the RAM module.
+### 2. Run the Simulation
 
-**THIS METHOD IS RECOMMENDED!!**
+After assembling the program, choose one of the following methods to run the simulation.
 
-## System Requirements
+#### Method A: Automated Simulation (Recommended)
 
-* Make sure you have Python3 installed in your system.
-* Make sure you have iverilog (abbreviation of Icarus Verilog) installed.
-* Make sure you have GTKWave (waveform analyzer tool) installed.
-* Make sure you have the latest version of make (to run the Makefile).
+This is the easiest way. Simply run the `make` command in your terminal. It will automatically compile, execute, and open the waveform viewer for you.
 
-## Recommended Way To Use
-
-Install iverilog (an open source verilog code synthesizer) from [here](https://bleyer.org/icarus/).
-
-Now, just execute the following command on cmd (for windows) or terminal (linux or mac):
-
-```bash
+```shell
 make
 ```
 
-That's it!
+#### Method B: Manual Simulation
 
-This "make" command will now create and open the waveform for the Verilog module - `CPU_tb.v` and you will be able to see it in GTKWave.
+If you don't have `make` installed, are on Windows, or prefer manual control, you can run the simulation with these commands:
 
-### Alternative Method (Windows/Manual)
-
-If you are on Windows and the Makefile is not working for you, try the following:
-
-* Open the cmd and 'cd' to the directory of the GitHub repository.
-* Use the following commands:
-
-```bash
+```shell
+# 1. Navigate into the Verilog directory
 cd VerilogModules
+
+# 2. Compile the testbench and all modules with your simulator
 iverilog CPU_tb.v
+
+# 3. Run the compiled simulation (this creates the dump.vcd file)
 vvp a.out
+
+# 4. Open the waveform file with GTKWave
 gtkwave dump.vcd
 ```
-
-Now the GTKWave program (also an open source waveform viewer) will display the output of the 8bit Computer in a new window.
 
 ## 📁 Project Structure
 
 ```
 .
-├── VerilogModules/   # Contains all the Verilog source code for the computer's components
-├── outputFiles/      # Holds the simulation outputs, including the waveform dump
-├── Assembler_v2.py   # The custom assembler script (recommended)
-├── DemoProgram.asm   # An example assembly program to run on the computer
-└── Makefile          # Automates the compilation and simulation workflow
+├── VerilogModules/   # Contains all the Verilog source code for the computer's components.
+├── outputFiles/      # Holds the simulation outputs, including the waveform dump.
+├── Assembler_v2.py   # The custom assembler script (recommended).
+├── Assembler_v1.py   # The original, manual assembler.
+├── DemoProgram.asm   # An example assembly program to run on the computer.
+└── Makefile          # Automates the compilation and simulation workflow.
 ```
 
-**THANK YOU !!!**
+> **Note on Assemblers:** This repository contains two versions. `Assembler_v2.py` is the recommended version as it directly updates the `RAM.v` file. The original `Assembler_v1.py` is also included for reference; it outputs to a `binary.txt` file and requires a manual copy-paste.
